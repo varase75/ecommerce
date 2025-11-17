@@ -1,0 +1,77 @@
+openapi: 3.0.4
+info:
+  title: Ecommerce API
+  description: API Price
+  version: 1.0.0
+tags:
+  - name: price
+    description: Price
+paths:
+  /price:
+    get:
+      tags: [ price ]
+      summary: Returns a price.
+      description: Get price
+      operationId: findPrice
+      parameters:
+        - name: date
+          in: query
+          description: Application date (format yyyy-MM-dd HH:mm)
+          schema:
+            type: string
+            format: date-time
+            example: 2020-06-14 16:00
+        - name: productId
+          in: query
+          description: Product Id
+          schema:
+            type: integer
+            format: int64
+            example: 35455
+        - name: brandId
+          in: query
+          description: Brand Id
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PriceResponse"
+components:
+  schemas:
+    PriceResponse:
+      type: object
+      properties:
+        productId:
+          description: Product Id
+          type: integer
+          format: int64
+        brandId:
+          description: Brand Id
+          type: integer
+          format: int32
+        priceList:
+          description: Price list
+          type: integer
+          format: int32
+        startDate:
+          description: Start date
+          type: string
+          format: date-time
+        endDate:
+          description: End date
+          type: string
+          format: date-time
+        price:
+          description: Price
+          type: number
+          format: double
+        currency:
+          description: Currency
+          type: string
+          example: EUR
